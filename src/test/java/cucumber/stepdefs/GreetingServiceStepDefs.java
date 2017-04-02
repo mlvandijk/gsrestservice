@@ -1,5 +1,6 @@
 package cucumber.stepdefs;
 
+import cucumber.GreetingServiceSteps;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 
@@ -8,15 +9,21 @@ import cucumber.api.java8.En;
  */
 public class GreetingServiceStepDefs implements En{
 
+    public GreetingServiceSteps greetingServiceSteps;
+
     public GreetingServiceStepDefs(){
         Given("^the greeting service is running$", () -> {
             // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
+//            throw new PendingException();
         });
 
         When("^the client requests /GET /greeting$", () -> {
-            // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
+            try {
+                greetingServiceSteps.theClientRequestsGETGreeting();
+            } catch (Throwable t) {
+                System.out.println("Throwable caught");
+                t.printStackTrace();
+            }
         });
 
         Then("^the response should be JSON:$", (String arg1) -> {
