@@ -1,7 +1,6 @@
 package cucumber;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonParser;
 import hello.Greeting;
 import org.junit.Assert;
 
@@ -42,7 +41,6 @@ public class GreetingServiceSteps {
 
     public void theResponseShouldBeJSON(String jsonExpected){
         ObjectMapper mapper = new ObjectMapper();
-//        String jsonInString = jsonExpected;
         try {
             Greeting greeting = mapper.readValue(jsonExpected, Greeting.class);
             String expectedValue = greeting.getContent();

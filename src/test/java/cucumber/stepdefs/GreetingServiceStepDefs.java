@@ -3,6 +3,8 @@ package cucumber.stepdefs;
 import cucumber.GreetingServiceSteps;
 import cucumber.api.PendingException;
 import cucumber.api.java8.En;
+import hello.Application;
+import org.springframework.boot.SpringApplication;
 
 /**
  * Created by maritvandijk on 4/2/17.
@@ -12,9 +14,8 @@ public class GreetingServiceStepDefs implements En{
     public GreetingServiceSteps greetingServiceSteps = new GreetingServiceSteps();
 
     public GreetingServiceStepDefs(){
-        Given("^the greeting service is running$", () -> {
-            // Write code here that turns the phrase above into concrete actions
-//            throw new PendingException();
+        Given("^the greeting service is running$", () -> { // TODO: automatically start service
+            SpringApplication.run(Application.class);
         });
 
         When("^the client requests /GET /greeting$", () -> {
@@ -26,7 +27,7 @@ public class GreetingServiceStepDefs implements En{
             }
         });
 
-        Then("^the response should be JSON:", (String jsonExpected) -> { // TODO: deal with variable id
+        Then("^the response should be JSON:", (String jsonExpected) -> {
             try {
                 greetingServiceSteps.theResponseShouldBeJSON(jsonExpected);
             } catch (Throwable t) {
@@ -34,8 +35,5 @@ public class GreetingServiceStepDefs implements En{
                 t.printStackTrace();
             }
         });
-
-
     }
-
 }
