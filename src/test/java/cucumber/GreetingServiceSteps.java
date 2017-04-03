@@ -24,6 +24,8 @@ public class GreetingServiceSteps {
             WebResource webResource = client.resource(BASE_URL); // TODO: Use server hooks (cucumber for java)
 
             response = webResource.type("application/json").get(ClientResponse.class);
+
+
         } catch (RuntimeException r) {
             throw r;
         } catch (Exception e) {
@@ -34,5 +36,11 @@ public class GreetingServiceSteps {
         Assert.assertEquals("Did not receive ok response: ", HttpURLConnection.HTTP_OK, response.getStatus());
     }
 
+
+    public void theResponseShouldBeJSON(String jsonExpected){
+        Assert.assertEquals("Incorrect JSON representation.", jsonExpected, response.getEntity(String.class));
+
+
+    }
 
 }

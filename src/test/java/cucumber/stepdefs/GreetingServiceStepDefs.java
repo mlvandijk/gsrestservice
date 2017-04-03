@@ -9,7 +9,7 @@ import cucumber.api.java8.En;
  */
 public class GreetingServiceStepDefs implements En{
 
-    public GreetingServiceSteps greetingServiceSteps;
+    public GreetingServiceSteps greetingServiceSteps = new GreetingServiceSteps();
 
     public GreetingServiceStepDefs(){
         Given("^the greeting service is running$", () -> {
@@ -26,9 +26,13 @@ public class GreetingServiceStepDefs implements En{
             }
         });
 
-        Then("^the response should be JSON:$", (String arg1) -> {
-            // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
+        Then("^the response should be JSON:$", (String jsonExpected) -> {
+            try {
+                greetingServiceSteps.theResponseShouldBeJSON(jsonExpected);
+            } catch (Throwable t) {
+                System.out.println("Throwable caught");
+                t.printStackTrace();
+            }
         });
     }
 
