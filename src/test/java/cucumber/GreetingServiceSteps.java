@@ -40,10 +40,20 @@ public class GreetingServiceSteps {
         Assert.assertEquals("Did not receive ok response: ", HttpURLConnection.HTTP_OK, response.getStatus());
     }
 
+    public void theResponseShouldBeJSON(String jsonExpected){
+        ObjectMapper mapper = new ObjectMapper();
+//        String jsonInString = jsonExpected;
+        try {
+            Greeting greeting = mapper.readValue(jsonExpected, Greeting.class);
+            String expectedValue = greeting.getContent();
+            String actualValue = mapper.readValue(response.getEntity(String.class), Greeting.class).getContent();
+            Assert.assertEquals("Unexpected JSON.", expectedValue, actualValue);
+        } catch (Exception e) {
+            System.out.println("Exception caught");
+            e.printStackTrace();
+        }
 
-    public void theResponseShouldBeJSON(String jsonExpected){ // Note: works only if id == 1
-        JsonParser parser = new JsonParser();
-        Assert.assertEquals("Unexpected JSON.", parser.parse(jsonExpected), parser.parse(response.getEntity(String.class)));
     }
+
 
 }
