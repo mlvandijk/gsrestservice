@@ -1,11 +1,15 @@
 package cucumber;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonParser;
+import hello.Greeting;
 import org.junit.Assert;
 
 import java.net.HttpURLConnection;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+
 
 /**
  * Created by maritvandijk on 4/2/17.
@@ -37,10 +41,9 @@ public class GreetingServiceSteps {
     }
 
 
-    public void theResponseShouldBeJSON(String jsonExpected){
-        Assert.assertEquals("Incorrect JSON representation.", jsonExpected, response.getEntity(String.class));
-
-
+    public void theResponseShouldBeJSON(String jsonExpected){ // Note: works only if id == 1
+        JsonParser parser = new JsonParser();
+        Assert.assertEquals("Unexpected JSON.", parser.parse(jsonExpected), parser.parse(response.getEntity(String.class)));
     }
 
 }

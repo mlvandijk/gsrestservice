@@ -26,7 +26,7 @@ public class GreetingServiceStepDefs implements En{
             }
         });
 
-        Then("^the response should be JSON:$", (String jsonExpected) -> {
+        Then("^the response should be JSON:", (String jsonExpected) -> { // TODO: deal with variable id
             try {
                 greetingServiceSteps.theResponseShouldBeJSON(jsonExpected);
             } catch (Throwable t) {
@@ -34,6 +34,8 @@ public class GreetingServiceStepDefs implements En{
                 t.printStackTrace();
             }
         });
+
+
     }
 
 }
