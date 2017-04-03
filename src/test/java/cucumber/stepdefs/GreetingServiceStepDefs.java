@@ -14,7 +14,7 @@ public class GreetingServiceStepDefs implements En{
     public GreetingServiceSteps greetingServiceSteps = new GreetingServiceSteps();
 
     public GreetingServiceStepDefs(){
-        Given("^the greeting service is running$", () -> { // TODO: automatically start service
+        Given("^the greeting service is running$", () -> {
             SpringApplication.run(Application.class);
         });
 

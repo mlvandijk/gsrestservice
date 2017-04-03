@@ -8,7 +8,7 @@ public class Greeting {
     private long id;
     private String content;
 
-    public Greeting(){ // no arg constructor is used by ObjectMapper
+    public Greeting(){ // Note: no arg constructor is used by ObjectMapper
 
     }
 
