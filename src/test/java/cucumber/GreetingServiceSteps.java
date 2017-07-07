@@ -5,6 +5,7 @@ import hello.Greeting;
 import org.junit.Assert;
 
 import java.net.HttpURLConnection;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -12,19 +13,12 @@ import com.sun.jersey.api.client.WebResource;
 public class GreetingServiceSteps {
     private ClientResponse response;
 
-    private String name;
     private final String BASE_URL = "http://localhost:8080/greeting";
     private final String BASE_URL_WITH_NAME_QUERY_PARAM = "http://localhost:8080/greeting?name=";
 
-    public void theClientRequestsGETGreeting() throws Throwable{
+    public void theClientRequestsGETGreeting() throws Throwable {
         try {
-            Client client = new Client();
-
-            WebResource webResource = client.resource(BASE_URL); // TODO: Use server hooks (cucumber for java)
-
-            response = webResource.type("application/json").get(ClientResponse.class);
-
-
+            getResponse(BASE_URL);
         } catch (RuntimeException r) {
             throw r;
         } catch (Exception e) {
@@ -35,17 +29,10 @@ public class GreetingServiceSteps {
         Assert.assertEquals("Did not receive ok response: ", HttpURLConnection.HTTP_OK, response.getStatus());
     }
 
-    public void theClientRequestsGETGreetingUsingQueryStringParameterUser() throws Throwable{
+    public void theClientRequestsGETGreetingUsingQueryStringParameter(String user) throws Throwable {
         try {
-            Client client = new Client();
-
-            name = "User";
-
-            WebResource webResource = client.resource(BASE_URL_WITH_NAME_QUERY_PARAM + name);
-
-            response = webResource.type("application/json").get(ClientResponse.class);
-
-
+            String url = BASE_URL_WITH_NAME_QUERY_PARAM + user;
+            getResponse(url);
         } catch (RuntimeException r) {
             throw r;
         } catch (Exception e) {
@@ -56,7 +43,7 @@ public class GreetingServiceSteps {
         Assert.assertEquals("Did not receive ok response: ", HttpURLConnection.HTTP_OK, response.getStatus());
     }
 
-    public void theResponseShouldBeJSON(String jsonExpected){
+    public void theResponseShouldBeJSON(String jsonExpected) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Greeting greeting = mapper.readValue(jsonExpected, Greeting.class);
@@ -68,6 +55,12 @@ public class GreetingServiceSteps {
             e.printStackTrace();
         }
 
+    }
+
+    private ClientResponse getResponse(String url) {
+        Client client = new Client();
+        WebResource webResource = client.resource(url);
+        return response = webResource.type("application/json").get(ClientResponse.class);
     }
 
 

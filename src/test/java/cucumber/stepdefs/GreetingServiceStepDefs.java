@@ -1,7 +1,6 @@
 package cucumber.stepdefs;
 
 import cucumber.GreetingServiceSteps;
-import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import hello.Application;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +14,7 @@ public class GreetingServiceStepDefs implements En {
             try {
                 SpringApplication.run(Application.class);
             } catch (Throwable t) {
-                System.out.println("Throwable caught");
+                System.out.println("The service cannot start, it is likely already running.");
             }
         });
 
@@ -28,9 +27,9 @@ public class GreetingServiceStepDefs implements En {
             }
         });
 
-        When("^the client requests /GET /greeting using query string parameter User$", () -> {
+        When("^the client requests /GET /greeting using query string parameter (.*)$", (String user) -> {
             try {
-                greetingServiceSteps.theClientRequestsGETGreetingUsingQueryStringParameterUser();
+                greetingServiceSteps.theClientRequestsGETGreetingUsingQueryStringParameter(user);
             } catch (Throwable t) {
                 System.out.println("Throwable caught");
                 t.printStackTrace();
