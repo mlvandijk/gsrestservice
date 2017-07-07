@@ -17,3 +17,8 @@ Expected result: `{"id":1,"content":"Hello, World!"}`
 
 Provide a name query string parameter with http://localhost:8080/greeting?name=User
 Expected result: `{"id":2,"content":"Hello, User!"}`
+
+## How to test the service using cucumber from IntelliJ
+* Install the Cucumber for java plugin in IntelliJ
+* Edit run configurations: set Glue to "cucumber.stepdefs"
+* Run the feature file
