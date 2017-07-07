@@ -17,21 +17,16 @@ public class GreetingServiceSteps {
     private final String BASE_URL_WITH_NAME_QUERY_PARAM = "http://localhost:8080/greeting?name=";
 
     public void theClientRequestsGETGreeting() throws Throwable {
-        try {
-            getResponse(BASE_URL);
-        } catch (RuntimeException r) {
-            throw r;
-        } catch (Exception e) {
-            System.out.println("Exception caught");
-            e.printStackTrace();
-        }
-
-        Assert.assertEquals("Did not receive ok response: ", HttpURLConnection.HTTP_OK, response.getStatus());
+        theClientRequestsGETGreeting(BASE_URL, "");
     }
 
-    public void theClientRequestsGETGreetingUsingQueryStringParameter(String user) throws Throwable {
+    public void theClientRequestsGETGreetingUsingQueryStringParameter(String username) throws Throwable {
+        theClientRequestsGETGreeting(BASE_URL_WITH_NAME_QUERY_PARAM, username);
+    }
+
+    public void theClientRequestsGETGreeting(String url, String name) throws Throwable {
+        url += name;
         try {
-            String url = BASE_URL_WITH_NAME_QUERY_PARAM + user;
             getResponse(url);
         } catch (RuntimeException r) {
             throw r;
