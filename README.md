@@ -5,11 +5,7 @@ Practice building a REST Web Service with Spring from tutorial:
 https://spring.io/guides/gs/rest-service/
 
 ## How to run the project
-If you are using Maven, you can run the application using 'mvn spring-boot:run'. 
-Or you can build the JAR file with 'mvn clean package'. 
-
-Then you can run the JAR file:
-'java -jar target/gs-rest-service-0.1.0.jar'
+If you are using Maven, you can run the application using 'mvn spring-boot:run'.
 
 ## How to test the service
 Once the project is running, go to: http://localhost:8080/greeting
@@ -22,3 +18,13 @@ Expected result: `{"id":2,"content":"Hello, User!"}`
 * Install the Cucumber for java plugin in IntelliJ
 * Edit run configurations: set Glue to "cucumber.stepdefs"
 * Run the feature file
+Note: The application is started from the test
+
+## How to test the service using restassured
+* start the application
+* run the test (HelloWorldTest.java) in the test/java/restassured folder
+
+## How to test the service using karate
+* start the application
+* run the test either by running the .feature file from the test/resources folder
+or by running the test file in the test/java/karate folder

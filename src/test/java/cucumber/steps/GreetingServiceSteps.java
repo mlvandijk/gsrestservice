@@ -1,4 +1,4 @@
-package cucumber;
+package cucumber.steps;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.Greeting;
