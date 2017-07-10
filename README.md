@@ -1,6 +1,6 @@
 # Getting started with REST Service and Spring
-# Overview of some test frameworks to test REST Services
 This project was started when I wanted to create a simple REST service with Spring, just for practice.
+# Overview of some test frameworks to test REST Services
 This simple service was used in a POC to compare several test frameworks for testing REST services.
 
 ## Description
